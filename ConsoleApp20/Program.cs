@@ -13,5 +13,5 @@ if (level == "e")
 else if (level == "m")
     Console.WriteLine("medium");
 else if (level == "h")
-    Console.WriteLine("hard questions");
+    Console.WriteLine("hard questions");easyScore]
 else Console.WriteLine("please enter a valid letter");
