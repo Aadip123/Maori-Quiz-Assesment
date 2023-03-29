@@ -6,8 +6,6 @@ int easyScore = 0;
 int mediumScore = 0;
 int hardScore = 0;
 
-//array for keeping track of scores
-int[] scores = new int[2];
 
 
 //array for levels
@@ -49,24 +47,49 @@ while (keepPlaying)
 
     if (level == "E")
     {
-             
+
+        string[] easyquestions = { "what is red", "what is blue" };
+        string[] easyanswers ={ "red","blue" };
+
+
+        for (int i = 0; i < 2; i++)
+        {
+            Console.WriteLine(easyquestions[i]);
+            string userasnwrr = Console.ReadLine();
+
+            if(userasnwrr == easyanswers[i])
+            {
+                Console.WriteLine("right");
+            }
+            else
+            {
+                Console.WriteLine("wrong");
+            }
+        }
+
+        // saving the score with the return from the method     
         easyScore = PlayEasyQuiz(easyScore);
 
+
+        // asks user if they want to play next level
         Console.WriteLine("\r\nDo you want to play the next level? (Y)es or (N)o");
         string answer = Console.ReadLine().ToUpper();
 
+        // added a while loop so if the user enters an option that it not Y or N they will be asked to re enter a new number 
         while (answer != "Y" && answer != "N")
         {
             Console.WriteLine("\r\nInvalid input. Please enter 'Y' for Yes or 'N' for No.");
             answer = Console.ReadLine().ToUpper();
         }
-
+        // added if statemnt for N and Y answers 
         if (answer == "N")
         {
             keepPlaying = false;
         }
         else if (answer == "Y")
         {
+            Console.Clear();
+
             Console.WriteLine("\r\nPlaying the medium level...");
             mediumScore = PlayMediumQuiz(mediumScore);
 
@@ -85,6 +108,8 @@ while (keepPlaying)
             }
             else if (answer == "Y")
             {
+                Console.Clear();
+
                 Console.WriteLine("\r\nPlaying the hard level...");
                 hardScore = PlayHardQuiz(hardScore);
                 keepPlaying = false;
@@ -111,6 +136,8 @@ while (keepPlaying)
         }
         else if (answer == "Y")
         {
+            Console.Clear();
+
             Console.WriteLine("\r\nPlaying the hard level...");
             hardScore = PlayHardQuiz(hardScore);
             keepPlaying = false;
@@ -129,7 +156,8 @@ Console.ReadLine();
 
 static int PlayEasyQuiz(int score)
 {
-    Console.WriteLine("Easy Questions:");
+
+   Console.WriteLine("Easy Questions:");
     Console.WriteLine("------------------");
 
     Console.WriteLine("1. What is the Māori word for hello?");
@@ -159,6 +187,7 @@ static int PlayEasyQuiz(int score)
 
 
 
+   
     Console.WriteLine("2. What is the Māori word for goodbye?");
     Console.WriteLine("a) E noho rā");
     Console.WriteLine("b) Kia ora");
