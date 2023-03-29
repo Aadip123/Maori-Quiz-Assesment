@@ -54,23 +54,24 @@ while (keepPlaying)
     {
         mediumScore = PlayMediumQuiz(mediumScore);
         Console.WriteLine("Do you want to play the next level? (Y)es or (N)o");
-        string answer = Console.ReadLine().ToUpper();
-
-        if (answer == "N")
+         string answer1 = Console.ReadLine().ToUpper();
+        if (answer1 == "N")
         {
             keepPlaying = false;
         }
+        else if (answer1 == "Y")
+        {
+            Console.WriteLine("Playing the hard level...");
+            hardScore = PlayHardQuiz(hardScore);
+            keepPlaying = false;
+        }
+        else
+        {
+            Console.WriteLine("Invalid level selected. Please try again.");
+            continue;
+        }
     }
-    else if (level == "H")
-    {
-        hardScore = PlayHardQuiz(hardScore);
-
-    }
-    else
-    {
-        Console.WriteLine("Invalid level selected. Please try again.");
-        continue;
-    }
+  
 
     Console.WriteLine($"Thank you for playing! Your final scores are: Easy: {easyScore}, Medium: {mediumScore}, Hard: {hardScore}");
     Console.ReadLine();
