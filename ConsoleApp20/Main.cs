@@ -1,4 +1,6 @@
 ﻿
+using System.Reflection.Emit;
+
 int easyScore = 0;
 int mediumScore = 0;
 int hardScore = 0;
@@ -11,7 +13,7 @@ Console.WriteLine("---------------------------");
 Console.WriteLine("Please enter name");
 string name = Console.ReadLine();
 Console.WriteLine($"Welcome {name}, we will start the quiz now");
-System.Threading.Thread.Sleep(3000);
+System.Threading.Thread.Sleep(1000);
 Console.Clear();
 
 bool keepPlaying = true;
@@ -20,12 +22,24 @@ while (keepPlaying)
 {
     Console.WriteLine("Select a difficulty level: (E)asy, (M)edium, or (H)ard");
     string level = Console.ReadLine().ToUpper();
+    if (!levels.Contains(level))
+    {
+        Console.WriteLine("Invalid level selected. Please try again.");
+        continue;
+    }
 
     if (level == "E")
     {
         easyScore = PlayEasyQuiz(easyScore);
+
         Console.WriteLine("Do you want to play the next level? (Y)es or (N)o");
         string answer = Console.ReadLine().ToUpper();
+
+        while (answer != "Y" && answer != "N")
+        {
+            Console.WriteLine("Invalid input. Please enter 'Y' for Yes or 'N' for No.");
+            answer = Console.ReadLine().ToUpper();
+        }
 
         if (answer == "N")
         {
@@ -35,8 +49,16 @@ while (keepPlaying)
         {
             Console.WriteLine("Playing the medium level...");
             mediumScore = PlayMediumQuiz(mediumScore);
+
             Console.WriteLine("Do you want to play the next level? (Y)es or (N)o");
             answer = Console.ReadLine().ToUpper();
+
+            while (answer != "Y" && answer != "N")
+            {
+                Console.WriteLine("Invalid input. Please enter 'Y' for Yes or 'N' for No.");
+                answer = Console.ReadLine().ToUpper();
+            }
+
             if (answer == "N")
             {
                 keepPlaying = false;
@@ -53,84 +75,91 @@ while (keepPlaying)
     else if (level == "M")
     {
         mediumScore = PlayMediumQuiz(mediumScore);
+
         Console.WriteLine("Do you want to play the next level? (Y)es or (N)o");
-         string answer1 = Console.ReadLine().ToUpper();
-        if (answer1 == "N")
+        string answer = Console.ReadLine().ToUpper();
+
+        while (answer != "Y" && answer != "N")
+        {
+            Console.WriteLine("Invalid input. Please enter 'Y' for Yes or 'N' for No.");
+            answer = Console.ReadLine().ToUpper();
+        }
+
+        if (answer == "N")
         {
             keepPlaying = false;
         }
-        else if (answer1 == "Y")
+        else if (answer == "Y")
         {
             Console.WriteLine("Playing the hard level...");
             hardScore = PlayHardQuiz(hardScore);
             keepPlaying = false;
         }
-        else
-        {
-            Console.WriteLine("Invalid level selected. Please try again.");
-            continue;
-        }
     }
-  
 
+    else if (level == "H")
+    {
+        hardScore = PlayHardQuiz(hardScore);
+        keepPlaying = false;
+    }
+
+}
     Console.WriteLine($"Thank you for playing! Your final scores are: Easy: {easyScore}, Medium: {mediumScore}, Hard: {hardScore}");
     Console.ReadLine();
 
-}
-
-static int PlayEasyQuiz(int score)
-{
-    Console.WriteLine("Easy Questions:");
-    Console.WriteLine("------------------");
-
-    Console.WriteLine("1. What is the Māori word for hello?");
-    Console.WriteLine("a) Kia ora");
-    Console.WriteLine("b) Haere mai");
-    Console.WriteLine("c) Ka kite");
-    Console.WriteLine("d) Nau mai");
-    string answer1 = Console.ReadLine().ToUpper();
-    if (answer1 == "A")
+    static int PlayEasyQuiz(int score)
     {
-        score++;
-        Console.WriteLine($"Correct point added! Your current score is {score}");
+        Console.WriteLine("Easy Questions:");
+        Console.WriteLine("------------------");
+
+        Console.WriteLine("1. What is the Māori word for hello?");
+        Console.WriteLine("a) Kia ora");
+        Console.WriteLine("b) Haere mai");
+        Console.WriteLine("c) Ka kite");
+        Console.WriteLine("d) Nau mai");
+        string answer1 = Console.ReadLine().ToUpper();
+        if (answer1 == "A")
+        {
+            score++;
+            Console.WriteLine($"Correct point added! Your current score is {score}");
+        }
+        else
+        {
+            Console.WriteLine($"Sorry, you have chosen an incorrect answer. Your score is {score}.");
+        }
+
+        Console.WriteLine("2. What is the Māori word for goodbye?");
+        Console.WriteLine("a) E noho rā");
+        Console.WriteLine("b) Kia ora");
+        Console.WriteLine("c) Haere mai");
+        Console.WriteLine("d) Mā");
+        string answer2 = Console.ReadLine().ToUpper();
+        if (answer2 == "A")
+        {
+            score++;
+            Console.WriteLine($"Correct point added! Your current score is {score}");
+        }
+        else
+        {
+            Console.WriteLine($"Sorry, you have chosen an incorrect answer. Your score is {score}.");
+        }
+
+        Console.WriteLine($"Thank you for playing the quiz. Your final score is {score}.");
+        return score;
     }
-    else
+
+
+    // method called easy showing score and level
+
+
+
+    //easy ends
+
+
+    static int PlayMediumQuiz(int score)
+
     {
-        Console.WriteLine($"Sorry, you have chosen an incorrect answer. Your score is {score}.");
-    }
-
-    Console.WriteLine("2. What is the Māori word for goodbye?");
-    Console.WriteLine("a) E noho rā");
-    Console.WriteLine("b) Kia ora");
-    Console.WriteLine("c) Haere mai");
-    Console.WriteLine("d) Mā");
-    string answer2 = Console.ReadLine().ToUpper();
-    if (answer2 == "A")
-    {
-        score++;
-        Console.WriteLine($"Correct point added! Your current score is {score}");
-    }
-    else
-    {
-        Console.WriteLine($"Sorry, you have chosen an incorrect answer. Your score is {score}.");
-    }
-
-    Console.WriteLine($"Thank you for playing the quiz. Your final score is {score}.");
-    return score;
-}
-
-
-// method called easy showing score and level
-
-
-
-//easy ends
-
-
-static int PlayMediumQuiz(int score)
-
-{
-    Console.WriteLine("Medium Questions:");
+        Console.WriteLine("Medium Questions:");
         Console.WriteLine("------------------");
 
         Console.WriteLine("1. What is the Māori word for thank you?");
@@ -164,19 +193,19 @@ static int PlayMediumQuiz(int score)
         {
             Console.WriteLine($"Sorry you have chosen an incorrect answer, your score is {score}.");
         }
-        
 
-    return score;
-  
 
- 
-}
+        return score;
+
+
+
+    }
 
 
 
     static int PlayHardQuiz(int score)
 
-    
+
 
 
     {
@@ -191,7 +220,7 @@ static int PlayMediumQuiz(int score)
         string hard1 = Console.ReadLine().ToUpper();
         if (hard1 == "A")
         {
-           score++;
+            score++;
             Console.WriteLine($"Correct point added your current score is {score}");
         }
         else if (hard1 != "A")
@@ -216,12 +245,12 @@ static int PlayMediumQuiz(int score)
         Console.WriteLine($"Thank you for playing! this is the end of the quiz ");
 
 
-    return score;
+        return score;
 
 
 
-}
-
+    }
+{ }
     
 
 
