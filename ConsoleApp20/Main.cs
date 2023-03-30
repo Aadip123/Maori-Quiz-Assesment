@@ -34,30 +34,173 @@ while (keepPlaying)
 {// Prompt the user to select a level 
     Console.WriteLine("Select a difficulty level: (E)asy, (M)edium, or (H)ard");
     string level = Console.ReadLine().ToUpper();
-   
-    
+
+
     //ask the question again if the incorrect option is choosen
     if (!levels.Contains(level))
     {
         Console.WriteLine("Invalid level selected. Please try again.");
         continue;
     }
+    // Array of questions for each level
+    string[][] questions = {
 
 
 
-    if (level == "E")
+    };
+    string[] Easy = {
+    
+        "Easy Questions:\n------------------\n 1. What is the Māori word for hello? \na) Kia ora \nb) Haere mai \nc) Ka kite \nd) Nau mai",
+        "Easy Questions:\n------------------\n 2. What is the Māori word for goodbye? \na) Ka kite \nb) Haere rā \nc) Nau mai \nd) Kia ora",
+        "Easy Questions:\n------------------\n 3. What is the Māori word for love? \na) Aroha \nb) Mana \nc) Whakapapa \nd) Kaitiakitanga"
+
+
+    };
+    string[] Medium = { 
+
+    "Medium Questions:\n--------------------\n 1. What is the meaning of the Māori word 'tino'? \na) Very \nb) Only \nc) Happy \nd) Again",
+        "Medium Questions:\n--------------------\n 2. Which of the following is NOT one of the three baskets of knowledge in Māori tradition? \na) Te Kete Aronui \nb) Te Kete Tuauri \nc) Te Kete Tuatea \nd) Te Kete Wananga",
+        "Medium Questions:\n--------------------\n 3. What is the name of the Māori god of the sea? \na) Tāne \nb) Rongo \nc) Tangaroa \nd) Tūmatauenga"
+
+    };
+    string[] Hard = {
+        "Hard Questions:\n------------------\n 1. Who was the first Māori king? \na) Tāwhiao \nb) Te Rata \nc) Potatau Te Wherowhero \nd) Te Kooti",
+            "Hard Questions:\n------------------\n 2. What is the name of the Māori creation story? \na) Te Kaha o te Rangatahi \nb) Te Awa Tupua \nc) Te Aitanga a Hauiti \nd) Te Kore",
+            "Hard Questions:\n------------------\n 3. What is the Māori word for the Southern Cross constellation? \na) Matariki \nb) Atutahi \nc) Tautoru \nd) Māhutonga"
+    };
+
+
+
+
+
+    // Array of answers for each question
+    string[][] answers = {
+    new string[] { "A", "B", "A" },
+    new string[] { "A", "C", "C" },
+    new string[] { "C", "D", "D" }
+};
+    // Display the questions based on the user's chosen level
+    int index;
+    switch (level)
+    {
+        case "E":
+            index = 0;
+            break;
+        case "M":
+            index = 1;
+            break;
+        case "H":
+            index = 2;
+            break;
+        default:
+            index = -1; // Should not reach this case due to the previous check for valid levels
+            break;
+    }
+
+    // Display each question in the selected level
+    foreach (string question in questions[index])
+    {
+        Console.WriteLine(question);
+        string answer = Console.ReadLine().ToUpper();
+        if (answer == "A" || answer == "B" || answer == "C" || answer == "D")
+        {
+            if (answer == "A" && question.Contains("Kia ora"))
+            {
+                Console.WriteLine("Correct!");
+                if (index == 0)
+                {
+                    easyScore++;
+                }
+                else if (index == 1)
+                {
+                    mediumScore++;
+                }
+                else
+                {
+                    hardScore++;
+                }
+            }
+            else if (answer == "B" && question.Contains("Haere rā"))
+            {
+                Console.WriteLine("Correct!");
+                if (index == 0)
+                {
+                    easyScore++;
+                }
+                else if (index == 1)
+                {
+                    mediumScore++;
+                }
+                else
+                {
+                    hardScore++;
+                }
+            }
+            else if (answer == "C" && question.Contains("Tangaroa"))
+            {
+                Console.WriteLine("Correct!");
+                if (index == 0)
+                {
+                    easyScore++;
+                }
+                else if (index == 1)
+                {
+                    mediumScore++;
+                }
+                else
+                {
+                    hardScore++;
+                }
+            }
+            else if (answer == "D" && question.Contains("Atutahi"))
+            {
+                Console.WriteLine("Correct!");
+                if (index == 0)
+                {
+                    easyScore++;
+                }
+                else if (index == 1)
+                {
+                    mediumScore++;
+                }
+                else
+                {
+                    hardScore++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Incorrect!");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid answer. Please try again.");
+        }
+    }
+    Console.WriteLine($"congrats for playing your scores are {easyScore} for easy {mediumScore} for medium and {hardScore} for hard ");
+
+    // Prompt the user to play again or quit
+    
+}
+
+
+    // Check if the user wants to play next level
+
+
+    /*if (level == "E")
     {
 
-        string[] easyquestions = { "what is red", "what is blue" };
-        string[] easyanswers ={ "red","blue" };
+        string[] easyquestions = {"Easy Questions:\n------------------\n 1. What is the Māori word for hello? \na) Kia ora \nb) Haere mai \nc) Ka kite \nd) Nau mai", "what is blue" };
+        string[] easyanswers ={ "A","blue" };
 
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 8; i++)
         {
             Console.WriteLine(easyquestions[i]);
-            string userasnwrr = Console.ReadLine();
+            string useranswer = Console.ReadLine().ToUpper();
 
-            if(userasnwrr == easyanswers[i])
+            if (useranswer.Contains(easyanswers[i]))
             {
                 Console.WriteLine("right");
             }
@@ -166,7 +309,7 @@ static int PlayEasyQuiz(int score)
     Console.WriteLine("c) Ka kite");
     Console.WriteLine("d) Nau mai");
     string answer1 = Console.ReadLine().ToUpper();
-    
+
     //for incorrect options
 
     while (answer1 != "A" && answer1 != "B" && answer1 != "C" && answer1 != "D")
@@ -183,11 +326,11 @@ static int PlayEasyQuiz(int score)
     {
         Console.WriteLine($"\r\nSorry, you have chosen an incorrect option. Your score is {score}.");
     }
-   
 
 
 
-   
+
+
     Console.WriteLine("2. What is the Māori word for goodbye?");
     Console.WriteLine("a) E noho rā");
     Console.WriteLine("b) Kia ora");
@@ -300,6 +443,7 @@ static int PlayHardQuiz(int score)
         Console.WriteLine($"\r\nSorry you have chosen an incorrect option, your score is {score}.");
     }
     Console.WriteLine($"\r\nThank you for playing the Hard Level. Your final score for this level is {score}.");
-    return score;
-}
+    return score;*/
+
+
 
