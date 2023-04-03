@@ -18,7 +18,11 @@ Console.WriteLine("---------------------------");
 Console.WriteLine("Please enter your name");
 
 //storing the name in a variable
+
+// Converting null literal or possible null value to non-nullable type.
 string name = Console.ReadLine();
+
+// Converting null literal or possible null value to non-nullable type.
 Console.WriteLine($"Welcome {name}, we will start the quiz now");
 
 
@@ -37,152 +41,78 @@ while (keepPlaying)
 
 
     //ask the question again if the incorrect option is choosen
-    if (!levels.Contains(level))
+    if (level != "E" && level  != "M" && level != "H")
     {
         Console.WriteLine("Invalid level selected. Please try again.");
         continue;
     }
-    // Array of questions for each level
-    string[][] questions = {
+    else if (level.Contains("E")) {
 
+        string[] Easy = new string[] {
 
-
-    };
-    string[] Easy = {
-    
         "Easy Questions:\n------------------\n 1. What is the Māori word for hello? \na) Kia ora \nb) Haere mai \nc) Ka kite \nd) Nau mai",
         "Easy Questions:\n------------------\n 2. What is the Māori word for goodbye? \na) Ka kite \nb) Haere rā \nc) Nau mai \nd) Kia ora",
         "Easy Questions:\n------------------\n 3. What is the Māori word for love? \na) Aroha \nb) Mana \nc) Whakapapa \nd) Kaitiakitanga"
+        };
+
+        string[] easyanswers = new string[]
+        {
+         "A", "A", "A"
+        };
+        for (int i = 0; i < easyanswers.Length; i++)
+        {
+            Console.WriteLine(Easy[i]);
+            string useranswer = Console.ReadLine().ToUpper();
+            if (useranswer.Contains(easyanswers[i]))
+
+            {
+                Console.WriteLine("you answer is correct");
+            }
+            else { Console.WriteLine("your answer is incorrect"); }
+
+        }
+    }
 
 
-    };
-    string[] Medium = { 
+
+
+    // Array of questions for each level
+    else if (level.Contains("M"))
+    {
+        string[] Medium = new string[] {
 
     "Medium Questions:\n--------------------\n 1. What is the meaning of the Māori word 'tino'? \na) Very \nb) Only \nc) Happy \nd) Again",
         "Medium Questions:\n--------------------\n 2. Which of the following is NOT one of the three baskets of knowledge in Māori tradition? \na) Te Kete Aronui \nb) Te Kete Tuauri \nc) Te Kete Tuatea \nd) Te Kete Wananga",
         "Medium Questions:\n--------------------\n 3. What is the name of the Māori god of the sea? \na) Tāne \nb) Rongo \nc) Tangaroa \nd) Tūmatauenga"
 
     };
-    string[] Hard = {
+    }
+    else if (level.Contains("H"))
+    {
+        string[] Hard = new string[] {
         "Hard Questions:\n------------------\n 1. Who was the first Māori king? \na) Tāwhiao \nb) Te Rata \nc) Potatau Te Wherowhero \nd) Te Kooti",
             "Hard Questions:\n------------------\n 2. What is the name of the Māori creation story? \na) Te Kaha o te Rangatahi \nb) Te Awa Tupua \nc) Te Aitanga a Hauiti \nd) Te Kore",
             "Hard Questions:\n------------------\n 3. What is the Māori word for the Southern Cross constellation? \na) Matariki \nb) Atutahi \nc) Tautoru \nd) Māhutonga"
     };
-
-
-
-
-
-    // Array of answers for each question
-    string[][] answers = {
-    new string[] { "A", "B", "A" },
-    new string[] { "A", "C", "C" },
-    new string[] { "C", "D", "D" }
-};
-    // Display the questions based on the user's chosen level
-    int index;
-    switch (level)
-    {
-        case "E":
-            index = 0;
-            break;
-        case "M":
-            index = 1;
-            break;
-        case "H":
-            index = 2;
-            break;
-        default:
-            index = -1; // Should not reach this case due to the previous check for valid levels
-            break;
     }
 
-    // Display each question in the selected level
-    foreach (string question in questions[index])
-    {
-        Console.WriteLine(question);
-        string answer = Console.ReadLine().ToUpper();
-        if (answer == "A" || answer == "B" || answer == "C" || answer == "D")
-        {
-            if (answer == "A" && question.Contains("Kia ora"))
-            {
-                Console.WriteLine("Correct!");
-                if (index == 0)
-                {
-                    easyScore++;
-                }
-                else if (index == 1)
-                {
-                    mediumScore++;
-                }
-                else
-                {
-                    hardScore++;
-                }
-            }
-            else if (answer == "B" && question.Contains("Haere rā"))
-            {
-                Console.WriteLine("Correct!");
-                if (index == 0)
-                {
-                    easyScore++;
-                }
-                else if (index == 1)
-                {
-                    mediumScore++;
-                }
-                else
-                {
-                    hardScore++;
-                }
-            }
-            else if (answer == "C" && question.Contains("Tangaroa"))
-            {
-                Console.WriteLine("Correct!");
-                if (index == 0)
-                {
-                    easyScore++;
-                }
-                else if (index == 1)
-                {
-                    mediumScore++;
-                }
-                else
-                {
-                    hardScore++;
-                }
-            }
-            else if (answer == "D" && question.Contains("Atutahi"))
-            {
-                Console.WriteLine("Correct!");
-                if (index == 0)
-                {
-                    easyScore++;
-                }
-                else if (index == 1)
-                {
-                    mediumScore++;
-                }
-                else
-                {
-                    hardScore++;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Incorrect!");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid answer. Please try again.");
-        }
+
+
+        string[] EasyA = { "A", "B", "A" };
+        string[] MediumA = { "A", "C", "C" };
+        string[] HardA = { "C", "D", "D" };
     }
+
+
+// Display each question in the selected level
+
+
+       
+
     Console.WriteLine($"congrats for playing your scores are {easyScore} for easy {mediumScore} for medium and {hardScore} for hard ");
 
     // Prompt the user to play again or quit
     
-}
 
 
     // Check if the user wants to play next level
