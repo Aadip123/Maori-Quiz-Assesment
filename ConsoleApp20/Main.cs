@@ -172,7 +172,7 @@ internal class Program
     {
         string[] Medium = new string[] {
 
-    "Medium Questions:\n--------------------\n 1. What is the meaning of the Māori word 'tino'? \na) Very \nb) Only \nc) Happy \nd) Again",
+        "Medium Questions:\n--------------------\n 1. What is the meaning of the Māori word 'tino'? \na) Very \nb) Only \nc) Happy \nd) Again",
         "Medium Questions:\n--------------------\n 2. Which of the following is NOT one of the three baskets of knowledge in Māori tradition? \na) Te Kete Aronui \nb) Te Kete Tuauri \nc) Te Kete Tuatea \nd) Te Kete Wananga",
         "Medium Questions:\n--------------------\n 3. What is the name of the Māori god of the sea? \na) Tāne \nb) Rongo \nc) Tangaroa \nd) Tūmatauenga"
 
@@ -212,7 +212,7 @@ internal class Program
     };
         string[] Hardanswers = new string[]
        {
-          "A", "B", "C"
+          "C", "D", "D"
     };
         for (int i = 0; i < Hardanswers.Length; i++)
         {
